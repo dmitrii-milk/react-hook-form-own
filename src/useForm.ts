@@ -107,6 +107,8 @@ export function useForm<
   const defaultValuesRef = React.useRef<DefaultValues<TFieldValues>>(
     defaultValues,
   );
+
+  console.log('defaultValuesRef', defaultValuesRef)
   const isUnMount = React.useRef(false);
   const isWatchAllRef = React.useRef(false);
   const handleChangeRef = React.useRef<HandleChange>();
@@ -157,6 +159,8 @@ export function useForm<
     : isEmptyObject(shallowFieldsStateRef.current)
     ? cloneObject(defaultValues)
     : shallowFieldsStateRef.current;
+
+  console.log('shallowFieldsStateRef', shallowFieldsStateRef);
 
   const updateFormState = React.useCallback(
     (state: Partial<FormState<TFieldValues>> = {}) => {
@@ -821,6 +825,8 @@ export function useForm<
       const watchFields = watchId
         ? useWatchFieldsRef.current[watchId]
         : watchFieldsRef.current;
+
+      console.log('watchFields', watchFields);
       let fieldValues = getFieldsValues<TFieldValues>(
         fieldsRef,
         cloneObject(shallowFieldsStateRef.current),
@@ -828,9 +834,12 @@ export function useForm<
         false,
         fieldNames,
       );
+      console.log('fieldValues', fieldValues);
 
       if (isString(fieldNames)) {
         const parentNodeName = getNodeParentName(fieldNames) || fieldNames;
+
+        console.log('parentNodeName', parentNodeName);
 
         if (fieldArrayNamesRef.current.has(parentNodeName)) {
           fieldValues = {
@@ -853,6 +862,8 @@ export function useForm<
       const combinedDefaultValues = isUndefined(defaultValue)
         ? defaultValuesRef.current
         : defaultValue;
+
+      console.log('combinedDefaultValues', combinedDefaultValues);
 
       if (Array.isArray(fieldNames)) {
         return fieldNames.reduce(

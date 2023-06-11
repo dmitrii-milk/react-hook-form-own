@@ -18,6 +18,14 @@ export default <TFieldValues extends FieldValues>(
 ) => {
   const output = {} as TFieldValues;
 
+  console.log('getFieldsValues', {
+    fieldsRef,
+    shallowFieldsState,
+    shouldUnregister,
+    excludeDisabled,
+    search,
+  })
+
   for (const name in fieldsRef.current) {
     if (
       isUndefined(search) ||
